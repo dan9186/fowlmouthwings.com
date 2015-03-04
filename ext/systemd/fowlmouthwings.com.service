@@ -1,0 +1,20 @@
+[Unit]
+Description=Nginx static site service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill fowlmouthwings.com
+ExecStartPre=-/usr/bin/docker rm fowlmouthwings.com
+ExecStartPre=/usr/bin/docker pull tutum/nginx
+ExecStart=/usr/bin/docker run --rm -e VIRTUAL_HOST=fowlmouthwings.com,www.fowlmouthwings.com -v /home/core/data/fowlmouthwings:/app --name fowlmouthwings.com tutum/nginx
+ExecStop=/usr/bin/docker stop fowlmouthwings.com
+TimeoutStartSec=0
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=role=docker_host
