@@ -1,7 +1,9 @@
 [Unit]
 Description=Nginx static site service
 After=docker.service
+After=reverse-proxy.service
 Requires=docker.service
+Requires=reverse-proxy.service
 
 [Service]
 Restart=always
