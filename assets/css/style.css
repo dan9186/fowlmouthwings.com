@@ -145,3 +145,14 @@ fieldset[disabled] .btn-donate.active {
 	color: #DC2E3C;
 	background-color: #ffffff; 
 }
+
+footer {
+	margin-top: 40px;
+	padding-top: 80px;
+	padding-bottom: 20px;
+	text-align: center;
+	color: #D6D6D6;
+	font-size: 10px;
+	min-height: 150px;
+	background-color: #292929;
+}
