@@ -23,3 +23,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 MachineMetadata=role=docker_host
+MachineOf=reverse-proxy.sevice
