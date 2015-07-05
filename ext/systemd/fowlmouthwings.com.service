@@ -22,5 +22,5 @@ RestartSec=5s
 WantedBy=multi-user.target
 
 [X-Fleet]
-MachineMetadata="role=docker_host" "instance_size=1"
+MachineMetadata=role=docker_host
 MachineOf=reverse-proxy.sevice
