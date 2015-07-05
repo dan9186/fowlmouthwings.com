@@ -1,0 +1,20 @@
+[Unit]
+Description=Reverse Proxying Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill reverse-proxy
+ExecStartPre=-/usr/bin/docker rm reverse-proxy
+ExecStartPre=/usr/bin/docker pull jwilder/nginx-proxy
+ExecStart=/usr/bin/docker run --rm -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock  --name reverse-proxy jwilder/nginx-proxy
+ExecStop=/usr/bin/docker stop reverse-proxy
+TimeoutStartSec=0
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=role=docker_host
