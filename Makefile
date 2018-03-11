@@ -27,10 +27,10 @@ ci_setup:  ## Setup the CI system
 deploy:  ## Deploy the project
 	@if [ "$(CI_BRANCH)" == "master" ]; then \
 		echo "Deploying to Testing Bucket"; \
-		gsutil -m rsync -d dist gs://$(TESTING_BUCKET)/; \
+		gsutil -m rsync -d -r dist gs://$(TESTING_BUCKET)/; \
 	elif [ "$(CI_BRANCH)" == "release" ]; then \
 		echo "Deploying to Prod Bucket"; \
-		gsutil -m rsync -d dist gs://$(PROD_BUCKET)/; \
+		gsutil -m rsync -d -r dist gs://$(PROD_BUCKET)/; \
 		gcloud compute url-maps invalidate-cdn-cache $(URL_MAP) --host $(PROD_CDN_HOST) --async --path "/*"; \
 	else \
 		echo "Not a deploy branch, no action performed"; \
